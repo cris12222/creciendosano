@@ -1,0 +1,183 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} UI Typography {% endblock %} 
+
+<!-- METAS  -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% load widget_tweaks %}
+{% block content %}
+
+        <div class="card">
+            <div class="card-header card-header-primary">
+              <h3 class="card-title">Metas</h3>
+              <p class="card-category">Administración de metas</p>
+            </div>
+            <div class="card-body">
+              <div id="typography">
+                <div class="card-title">
+                  <h3>Registrar una meta</h3>
+                </div>
+                    <form method="post">
+                      {% csrf_token %}
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Nombre de meta</label>
+                          {% render_field metaform.nombre class="form-control"  required="required"  %}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Objetivo del mes</label>
+                          {% render_field metaform.objetivo class="form-control"  required="required"  %}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">valor</label>
+                          {% render_field metaform.valor class="form-control"  required="required"  %}
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Tema semanal</label>
+                          {% render_field metaform.tema_semanal  class="form-control"  required="required"  %}
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Tema central</label>
+                          {% render_field metaform.tema_central  class="form-control"  required="required"  %}
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">periodo</label>
+                          {% render_field metaform.periodo  class="form-control"  required="required"  %}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-5">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Responsable</label>
+                          {% render_field metaform.responsable class="form-control"  required="required"  %}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>Descripción</label>
+                          <div class="form-group">
+                            <label class="bmd-label-floating"> Ingresa la descripción de tu meta</label>
+                            {% render_field metaform.descripcion class="form-control"  required="required"  %}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary pull-right">Guardar</button>
+                    <div class="clearfix"></div>
+                  </form>
+              </div>
+            </div>
+        </div>
+
+        <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h3 class="card-title">Metas guardadas</h3>
+                        <p class="card-category">Gestiona las metas</p>
+                    
+            </div>
+                      <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+            <div class="card-body">
+              <div id="typography">
+                <div class="card-title"></div>
+                    <form>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <div class="container">
+              <div class="panel-group" id="accordion">
+
+                {% for m in metas%}
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}">Meta: {{m.nombre}}</a>
+                    </h4>
+                  </div>
+                  <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse in">
+                    <form method="post">
+                      {% csrf_token %}
+                    <div class="row">
+                      <div class="col-md-12">
+                          <label class="bmd-label-floating">Nombre de meta</label>
+                          <h5>{{m.nombre}}</h5>
+                      </div>
+                    </div>objetivo
+                    <div class="row">
+                      <div class="col-md-12">
+                          <label class="bmd-label-floating">Objetivo del mes</label>
+                          <h5>{{m.objetivo}}</h5>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-3">
+                          <label class="bmd-label-floating">Valor</label>
+                          <h5>{{m.valor}}</h5>
+                      </div>
+                      <div class="col-md-3">
+                          <label class="bmd-label-floating">Tema Semanal</label>
+                          <h5>{{m.tema_semanal}}</h5>
+                      </div>
+                      <div class="col-md-3">
+                          <label class="bmd-label-floating">Tema central</label>
+                          <h5>{{m.tema_central}}</h5>
+                      </div>
+                      <div class="col-md-3">
+                          <label class="bmd-label-floating">periodo</label>
+                          <h5>{{m.periodo}}</h5>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-5">
+                          <label class="bmd-label-floating">Responsable</label>
+                          <h5>{{m.responsable}}</h5>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                          <label>Descripción</label>
+                            <label class="bmd-label-floating"> Ingresa la descripción de tu meta</label>
+                            <h5>{{m.descripcion}}</h5>
+                      </div>
+                    </div>
+                    <td><a class="btn btn-danger" id="btnEliminar{{ forloop.counter }}" href="{% url 'DeleteMeta' m.id  %}" ><span class="glyphicon glyphicon-trash">Eliminar</span></a></td>
+                        <td><a class="btn btn-success" id="btnGuardar{{ forloop.counter }}" href="{% url 'EditMeta' m.id  %}" ><span class="glyphicon glyphicon-trash">Editar</span></a></td>
+                        <div class="clearfix"></div>
+                  </form>
+
+                  </div>
+
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+     </div>
+    </form>
+      </div>
+       </div>
+         </div>
+
+{% endblock content %}
+
+
+
